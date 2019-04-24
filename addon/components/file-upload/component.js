@@ -88,11 +88,7 @@ const component = Component.extend({
 
   attributeBindings: ['for'],
 
-  for: computed({
-    get() {
-      return `file-input-${uuid.short()}`;
-    }
-  }),
+  for: undefined,
 
   layout,
 
@@ -154,6 +150,9 @@ const component = Component.extend({
     this._super(...arguments);
     if (get(this, 'queue')) {
       setProperties(get(this, 'queue'), getProperties(this, 'accept', 'multiple', 'disabled', 'onfileadd'));
+    }
+    if (!get(this, 'for')) {
+      this.set('for', `file-input-${uuid.short()}`);
     }
   },
 
